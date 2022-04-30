@@ -1,5 +1,5 @@
 const express = require('express');
-const { MongoClient, ServerApiVersion } = require('mongodb');
+const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
 const cors = require('cors');
 const app = express();
 const port = process.env.PORT || 5000;
@@ -16,12 +16,19 @@ async function run(){
         await client.connect();
         const productsCollection = client.db('dValley').collection('products');
 
-        app.get('/products', async(rwq, res)=>{
+        app.get('/products', async(req, res)=>{
             const query = {};
             const cursor = productsCollection.find(query);
             const products = await cursor.toArray();
             res.send(products);
-        })
+        });
+
+        app.get('/products/:id', async(req,res)=>{
+            const id = req.params.id;
+            const query = {_id: ObjectId(id)};
+            const result = await productsCollection.findOne(query);
+            res.send(result);
+        });
     }
     finally{
 
