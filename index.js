@@ -36,6 +36,7 @@ async function run(){
             res.send(result);
         })
 
+        // delete
         app.delete('/products/:id', async(req, res)=>{
             const id = req.params.id;
             const query = {_id: ObjectId(id)};
@@ -43,6 +44,30 @@ async function run(){
             res.send(result);
         })
 
+        // update
+        app.get('/products/:id', async(req,res)=>{
+            const id = req.params.id;
+            const query = {_id: ObjectId(id)};
+            const result = await productsCollection.findOne(query);
+            res.send(result);
+        });
+        app.put('/products/:id', async(req, res)=>{
+            const id = req.params.id;
+            const updateProduct = req.body;
+            const filter = {_id: ObjectId(id)};
+            const options = {upsert: true};
+            const updateDoc = {
+                $set: {
+                    quantity: updateProduct.quantity
+                }
+            };
+            // const newKey = await productsCollection.find(filter, {fields: {'quantity':1}}).toArray(function(err, docs){
+            //     if (err) throw err;
+            //     console.log(docs);
+            //  });
+            const result = await productsCollection.updateOne(filter, updateDoc, options);
+            res.send(result);
+        })
     }
     finally{
 
