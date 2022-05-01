@@ -62,10 +62,6 @@ async function run(){
                     quantity: updateProduct.quantity
                 }
             };
-            // const newKey = await productsCollection.find(filter, {fields: {'quantity':1}}).toArray(function(err, docs){
-            //     if (err) throw err;
-            //     console.log(docs);
-            //  });
             const result = await productsCollection.updateOne(filter, updateDoc, options);
             res.send(result);
         })
