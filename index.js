@@ -64,7 +64,16 @@ async function run(){
             };
             const result = await productsCollection.updateOne(filter, updateDoc, options);
             res.send(result);
+        });
+
+        app.get('/myProducts', async(req, res)=>{
+            const email = req.query.email;
+            const query = {email: email};
+            const cursor = productsCollection.find(query);
+            const myProducts = await cursor.toArray();
+            res.send(myProducts);
         })
+
     }
     finally{
 
