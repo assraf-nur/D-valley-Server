@@ -36,7 +36,7 @@ async function run() {
     await client.connect();
     const productsCollection = client.db("dValley").collection("products");
 
-    app.post("/login", async (req, res) => {
+    app.get("/login", async (req, res) => {
       const user = req.body;
       const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, {
         expiresIn: "15d",
