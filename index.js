@@ -97,7 +97,7 @@ async function run() {
       res.send(result);
     });
 
-    app.get("/myProducts", verifyJWT, async (req, res) => {
+    app.get("/myProducts", async (req, res) => {
       const email = req.query.email;
       const query = { email: email };
       const cursor = productsCollection.find(query);
