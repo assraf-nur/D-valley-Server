@@ -110,9 +110,6 @@ async function run() {
 run().catch(console.dir);
 
 app.get("/", (req, res) => {
-  res.send("running server");
-});
-app.get("/", (req, res) => {
   res.send("heroku is running");
 });
 
