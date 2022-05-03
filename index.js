@@ -79,6 +79,7 @@ async function run() {
       const result = await productsCollection.findOne(query);
       res.send(result);
     });
+    
     app.put("/products/:id", async (req, res) => {
       const id = req.params.id;
       const updateProduct = req.body;
