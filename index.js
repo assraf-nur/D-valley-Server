@@ -114,6 +114,10 @@ app.get("/", (req, res) => {
   res.send("heroku is running");
 });
 
+app.get("/", (req, res) => {
+  res.send("Running");
+});
+
 app.listen(port, () => {
   console.log("Server is running");
 });
